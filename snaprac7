@@ -1,0 +1,7 @@
+##for creating sociograms
+install.packages('Dominance')
+library('Dominance')
+data(data_Network_1)
+bytes="00111111111000000000"
+Sociogram(data_Network_1,bytes)
+print(data_Network_1)

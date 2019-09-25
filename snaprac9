@@ -1,0 +1,40 @@
+
+##bipartite
+library(igraph)
+davis <- read.csv(file.choose(&quot;C:/Users/student/Documents/&quot;),header=FALSE)
+g <- graph.data.frame(davis,directed=FALSE)
+plot(g)
+bipartite.mapping(g)
+
+V(g)$type <- bipartite_mapping(g)$type
+plot(g) #Plotting a bipartite network
+plot(g, vertex.label.cex = 0.8, vertex.label.color ="black")
+V(g)$color <- ifelse(V(g)$type, "lightblue", "salmon")
+V(g)$shape <- ifelse(V(g)$type, "circle", "square")
+E(g)$color <- &quot;lightgray&quot;
+plot(g, vertex.label.cex = 0.8,vertex.label.color ="black")
+V(g)$label.color <- "black"
+#label.cex value to adjust our label size
+V(g)$label.cex <- 1
+V(g)$frame.color <- "gray"
+V(g)$size <- 18
+plot(g, layout = layout_with_graphopt)
+plot(g, layout=layout.bipartite, vertex.size=7,vertex.label.cex=0.6)
+library
+
+dataset for bipartite
+EVELYN,1 
+EVELYN,2
+EVELYN,3
+EVELYN,4
+EVELYN,5
+EVELYN,6
+EVELYN,7
+LAURA,1
+LAURA,2
+LAURA,3
+LAURA,4
+LAURA,5
+LAURA,6
+THERESA,1
+THERESA,2
