@@ -1,0 +1,51 @@
+package temp;
+
+import java.io.*;
+import java.util.Scanner;
+public class FindWordInFile{
+    String findword;
+	
+    int count=0,count1;
+    FindWordInFile() throws FileNotFoundException
+    {
+       
+            Scanner sc=new Scanner(System.in);
+            System.out.println("Enter name to be searched: \n");
+
+            findword=sc.next();
+            String path="C:\\Users\\Rahul\\Desktop\\abc.py";
+            FileInputStream fis=new FileInputStream(path);
+            Scanner inputwords=new Scanner(fis);
+            while(inputwords.hasNext())
+            {
+                String nextword=inputwords.next();
+                if(nextword.equals(findword))
+                {
+                    count++;
+                    
+                }
+                count1++;
+                
+                
+            }
+            //System.out.print(count1+"");
+            if(count>0)
+            {
+                System.out.println("Word '"+findword+ "' found for "+count+" times in  '"+path+"'");
+            }
+            else
+            {
+                System.out.println("NO such word");
+            }
+              
+         
+                    
+    }
+      
+    
+    public static void main(String[] args) throws FileNotFoundException {
+        new FindWordInFile();
+       
+    }
+    
+}    

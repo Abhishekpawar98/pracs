@@ -1,0 +1,66 @@
+Following are some registry keys of forensic value
+
+1)HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidMRU
+MRU is the abbreviation for most-recently-used. This key maintains a list of recently opened or saved files via typical Windows Explorer-style common dialogue boxes.
+
+2) HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+This key maintains a list of entries (e.g. full file path or commands like cmd, regedit, compmgmt.msc) executed using the start>run command.
+
+3) HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\
+This key shows the recent documents that were opened.
+
+4) HKCU\Software\Microsoft\Windows\Internet Explorer\TypedURLs\
+This key shows the typed URLs in Internet Explorer.
+
+5) HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\LastVisitedPidlMRU\
+This key gives last visited MRUs.
+
+
+8.2 Computer Network
+1) HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComputerDescriptions.
+
+Windows XP implements a network mapping tool called My Network Place, which allows users to easily find other users within a LAN or Local Area Network. A computer on a properly configured LAN should be able to display all the users on that network through My Network Place. This list of users or computers, like many other things, is stored in the Registry. Therefore, even after the user is no longer connected to the LAN, the list of devices still remain, including desktop computers, laptops, and printers.
+The ComputerDescriptions key is useful in determining whether or not a user was connected to certain computers or belonged to a specific LAN.
+
+2) In order to determine the last time the device was connected to the system, we have to navigate to the following Registry key:
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceClasses
+
+Beneath this key are two other keys of interest:
+
+{53f56307-b6bf-11d0-94f2-00a0c91efb8b} & {53f5630d-b6bf-11d0-94f2-00a0c91efb8b}
+
+These are Device Class GUID keys for Disks and Volumes, respectively. Beneath the Disk GUID key are several subkeys that appear as follows (the key name is wrapped):
+
+##?#USBSTOR#Disk&Ven_SanDisk&Prod_U3_Cruzer_Micro&Rev_3.27#0000161511737EFB&0
+#{53f56307-b6bf-11d0-94f2-00a0c91efb8b}
+
+
+
+
+8.3 Mobile Device
+View the device interface GUID, Hardware Id, and device class information about your device.
+
+1) Find this registry key and note the DeviceInstance value:
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceClasses\
+
+2) Find the device instance registry key and get the device interface GUID:
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB\<hardware id>\<instance id>\Device Parameters
+
+3) Under the device instance key, note the device class, subclass, and protocol codes:
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB
+
+
+
+8.4 Wireless Network
+
+1) HKLM\SOFTWARE\Microsoft\WZCSVC\Parameters\Interfaces
+
+A wireless ethernet card picks up wireless access points within its range, which are identified by their SSID or service set identifier. When an individual connects to a network or hotspot the SSID is logged within Windows XP as a preferred network connection. There may be additional values that begin with 'Static#' and are sequentially numbered. In the binary data of these 'Static#' values are the network SSIDs of all the wireless access points that system has connected to. 
+
+2) HKLM\SYSTEM\ControlSet001\ Services\Tcpip\Parameters\Interfaces\
+
+n addition to logging the name of the SSID, Windows also logs the network settings of that particular connection - such as the IP address, DHCP domain, subnet mask, etc.
+
