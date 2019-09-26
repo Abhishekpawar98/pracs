@@ -1,0 +1,15 @@
+##for structural equivalent
+install.packages("sna")
+library('sna')
+library('igraph')
+links<-read.csv("graphs.csv",header=T,row.names = 1)
+eq <- equiv.clust(links)
+plot(eq)
+
+##for structural equivalent
+g.se<-sedist(links)
+plot(cmdscale(as.dist(g.se)))
+
+##blockmodelling
+b<-blockmodel(links,eq,h=10)
+plot(b)
