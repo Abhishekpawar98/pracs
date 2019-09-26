@@ -1,5 +1,0 @@
-##hamming distance
-library('e1071')
-x<-c(1,0,0,1)
-y<-c(0,0,0,1)
-hamming.distance(x,y)
