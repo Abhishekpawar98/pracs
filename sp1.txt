@@ -1,0 +1,37 @@
+library(igraph)
+g <- graph.formula(1-2,2-3,3-1)
+
+#for plotting directed graph
+g1<-graph.formula(1-+2,2-+3,3++1)
+plot(g1,vertex.size=60)
+
+
+plot(g)
+#for getting vertices name
+V(g)
+
+#for getting edges
+E(g)
+
+#for getting count of vertices
+vcount(g)
+
+#for getting count of edges
+ecount(g)
+
+#for getting in degree and out degree
+degree(g,mode='in')
+degree(g,mode='out')
+
+#node with lowest degree and highest degree
+V(g)$name[degree(g)==min(degree(g))]
+V(g)$name[degree(g)==max(degree(g))]
+
+#to get neighbors
+neighbors(g,2)
+
+#to get adjacency list
+get.adjlist(g)
+
+#to get adjacency matrix
+get.adjacency(g)
