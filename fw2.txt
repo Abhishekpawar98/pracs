@@ -1,0 +1,29 @@
+#storing text file in variable f with permission as r means read only
+f = open('words.txt','r')
+#Create empty list to append word by word
+w=[]
+#Include punctuations to removed from text file
+punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+#String to save no punctuations text file
+no_punct = ""
+#iterate till file ends
+for i in f:
+	#Checking punctuations exists or not
+	if i not in punctuations:
+		no_punct = no_punct + i
+	#Storing non punctuations text file
+	temp_list = no_punct.split()
+	#Iterate till temp_list to end
+	for j in temp_list:
+		#storing word by word
+		w.append(j)
+	temp_list.clear()
+#take custome word from user
+custom_word = input('Enter a word to be search in file ')
+count_for_word = 0
+for z in w:
+	#checking occurence in file
+	if z == custom_word:
+		count_for_word = count_for_word+1
+
+print('The word '+custom_word+' was found '+str(count_for_word)+' times in the specified file')
