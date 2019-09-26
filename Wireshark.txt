@@ -1,0 +1,125 @@
+#Inspect traffic for specific Ip address
+ip.addr == 192.168.0.2
+
+#Sniff credential detail from vulnerable websites
+trafficindia.com/india.html
+http.request.method == POST
+
+3) For specific ip address search for specific word
+http.referer contains "mu"
+
+4) Check what user has typed in browser in url
+ip.addr == 192.168.0.2
+
+5)Check what string user has passed  in google search engine
+ip.addr == 192.168.2.54 && nbns
+
+6)Detect DOS attack
+In other cmd
+ping (Enter ip address) 
+Open Wireshark
+icmp
+#To trace route
+IN CMD
+tracert (ip address)
+
+7) Find out packets which are getting response as page not found
+http.response.code == 404
+
+8) Find Out Packets which are getting response from particular respect
+	http.response.code==200
+
+9) Find Packets according to their length
+	frame.len<100
+
+10) Find packets Browser specific
+http.user_agent contains "Chrome"
+
+11) Inspect traffic between its source and destination
+	ip.src==192.168.2.106/16 and ip.dst==192.168.2.105/16
+
+12) Find out packets which have good checksum value
+udp.checksum
+or
+ip.checksum_good==1 or ip.checksum_good==0
+
+
+
+
+##SNiffing between client and server
+13) Sniff Communication between client and server
+
+Server side
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.ClassNotFoundException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+class SocketServer{
+    
+    //static ServerSocket variable
+    private static ServerSocket server;
+    //socket server port on which it will listen
+    private static int port = 9876;
+    
+    public static void main(String args[]) throws IOException, ClassNotFoundException{
+        	//create the socket server object
+        	server = new ServerSocket(port);
+        	System.out.println("Waiting for the client request");
+            //creating socket and waiting for client connection
+            Socket socket = server.accept();
+            //read from socket to ObjectInputStream object
+            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            //convert ObjectInputStream object to String
+            String message = (String) ois.readObject();
+            System.out.println("Message Received from client: " + message);
+            //create ObjectOutputStream object
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            //write object to Socket
+            oos.writeObject("Hi Client this is server");
+            //close resources
+            ois.close();
+            oos.close();
+            socket.close();
+        System.out.println("Shutting down Socket server!!");
+        //close the ServerSocket object
+        server.close();
+    }
+    
+}
+
+client side
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+class SocketClient {
+
+    public static void main(String[] args) throws Exception{
+        	//get the localhost IP address, if server is running on some other IP, you need to use that
+        	InetAddress host = InetAddress.getLocalHost();
+            //establish socket connection to server
+            Socket socket = new Socket(host.getHostName(), 9876);
+            //write to socket using ObjectOutputStream
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            System.out.println("Sending request to Socket Server");
+            oos.writeObject("hello server this is client");
+            //read the server response message
+            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            String message = (String) ois.readObject();
+            System.out.println("Message from server: " + message);
+            //close resources
+            ois.close();
+            oos.close();
+    }
+}
+
+in wireshark command
+tcp.stream eq 1
+
