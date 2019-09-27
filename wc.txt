@@ -1,4 +1,4 @@
-#first do pip install wordcloud
+#first do pip install wordcloud or do python -m pip install wordcloud
 
 
 from wordcloud import WordCloud, STOPWORDS
