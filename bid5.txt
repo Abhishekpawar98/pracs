@@ -1,0 +1,13 @@
+library("tm")
+library("devtools")
+library("textreuse")
+library("ggplot2")
+##first create text files in the directory
+minhash <- minhash_generator(200, seed=235)
+ats<-TextReuseCorpus(dir ="C:\\MSC Part2\\txtfolder",tokenizer =  tokenize_ngrams, n=3,minhash_func = minhash)
+buckets<-lsh(ats,bands=25, progress=interactive())
+candidates<-lsh_candidates(buckets)
+scores<-lsh_compare(candidates,ats,jaccard_similarity,progress = FALSE)
+scores
+color<-c("red","green","blue","orange","yellow","pink")
+barplot(as.matrix(scores),col = color)
