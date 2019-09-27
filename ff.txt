@@ -1,5 +1,0 @@
-import os
-for file in os.listdir("/home/abhi/Documents/rcode/"):
-    if file.startswith("s"):
-        print(os.path.join("/home/abhi/Documents/rcode/", file))
-
