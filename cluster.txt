@@ -1,0 +1,32 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+
+#clustering model
+from sklearn.cluster import KMeans
+from sklearn.cluster import DBSCAN
+from sklearn.cluster import AgglomerativeClustering
+
+
+
+data = pd.read_csv('data.csv')
+encoder = LabelEncoder()
+y = encoder.fit_transform(column_to_encode)
+scaler = StandardScaler()
+X = scaler.fit_transform(np.array(data.iloc[:, :-1], dtype = float))
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+kmeans = KMeans(n_clusters=10, random_state=0).fit(X_train)
+#print(kmeans.labels_)
+y_kmeans=kmeans.predict(X_test)
+plt.scatter(X_test[:, 0], X_test[:, 1], c=y_kmeans, s=50, cmap='viridis')
+plt.savefig('sc1.png')
+
+centers = kmeans.cluster_centers_
+plt.scatter(centers[:, 0], centers[:, 1], c='black', s=200, alpha=0.5);
+plt.savefig('sc2.png')
+
