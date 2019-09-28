@@ -7,6 +7,13 @@ my.tdm<- TermDocumentMatrix(my.corpus)
 my.dtm<- DocumentTermMatrix(my.corpus,control=list(weighting=weightTfIdf,stopWords=TRUE))
 my.df<- as.data.frame(inspect(my.tdm))
 my.df.scale<-scale(my.df)
+#below line is for getting words which appear atleast twice in corpus
+#findFreqTerms(my.tdm, 2)
+
+#below line is for  getting all words which appear with the specified word 
+#findAssocs(dtmr,”project”,0.6)
+
+
 d<- dist(my.df.scale,method = "euclidean")
 fit<- hclust(d,method="ward")
 plot(fit)
